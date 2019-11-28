@@ -17,7 +17,6 @@ pipeline {
         stage('Build') { 
             agent {
                 docker {
-                    label 'docker'
                     image 'node:6-alpine' 
                     args '-p 3000:3000' 
                 }
@@ -35,7 +34,6 @@ pipeline {
         stage('Building image') {
             agent {
                 docker {
-                    label 'docker'
                     image 'node:6-alpine' 
                     args '-p 3000:3000' 
                 }
@@ -49,7 +47,6 @@ pipeline {
         stage('Deploy Image') {
             agent {
                 docker {
-                    label 'docker'
                     image 'node:6-alpine' 
                     args '-p 3000:3000' 
                 }
