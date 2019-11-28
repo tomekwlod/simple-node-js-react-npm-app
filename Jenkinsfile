@@ -4,23 +4,16 @@ pipeline {
         registryCredential = 'dockerhub'
     }
 
-    // agent {
-        // docker {
-        //     label 'docker'
-        //     image 'node:6-alpine' 
-        //     args '-p 3000:3000' 
-        // }
-    // }
     agent 'any'
 
     stages {
-        stage('Build') { 
-            agent {
-                docker {
-                    image 'node:6-alpine' 
-                    args '-p 3000:3000' 
-                }
+        agent {
+            docker {
+                image 'node:6-alpine' 
+                args '-p 3000:3000' 
             }
+        }
+        stage('Build') {
             steps {
                 sh 'npm install' 
             }
@@ -32,12 +25,6 @@ pipeline {
         //     }
         // }
         stage('Building image') {
-            agent {
-                docker {
-                    image 'node:6-alpine' 
-                    args '-p 3000:3000' 
-                }
-            }
             steps{
                 script {
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
@@ -45,12 +32,6 @@ pipeline {
             }
         }
         stage('Deploy Image') {
-            agent {
-                docker {
-                    image 'node:6-alpine' 
-                    args '-p 3000:3000' 
-                }
-            }
             steps {
                 script {
                     docker.withRegistry( '', registryCredential ) {
