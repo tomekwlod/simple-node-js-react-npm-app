@@ -4,7 +4,7 @@ pipeline {
         registryCredential = 'dockerhub'
     }
 
-    agent 'any'
+    agent any
 
     stages {
         stage('Build') {
@@ -19,11 +19,11 @@ pipeline {
             }
         }
 
-        // stage('Test') {
-        //     steps {
-        //         sh 'npm test'
-        //     }
-        // }
+        stage('Test') {
+            steps {
+                sh 'ls -alh'
+            }
+        }
         stage('Building image') {
             steps{
                 script {
